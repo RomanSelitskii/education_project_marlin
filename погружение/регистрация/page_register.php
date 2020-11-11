@@ -66,7 +66,7 @@ session_start();
                                 <div class="card p-4 rounded-plus bg-faded">
 
                                 <? 
-                                if(!empty($_SESSION['status'])) {
+                                if(!empty($_SESSION['status'])): 
                                 
                                 ?>
                                     <div class="alert alert-<? echo $_SESSION['status']; ?> text-dark" role="alert">
@@ -74,7 +74,7 @@ session_start();
                                     </div>
                                     
                                     <? 
-                                    }
+                                    endif;
 
                                     unset($_SESSION['status']);
                                     unset($_SESSION['message']);

@@ -14,7 +14,10 @@ $is_double = $statement->fetch(PDO::FETCH_ASSOC);
 if($is_double == false) {
     $sql = 'INSERT INTO users_table (email, password) VALUES (:email, :password);';
     $statement = $pdo->prepare($sql);
-    $statement->execute(['email' => $email, 'password' => $password]);
+    $statement->execute([
+        'email' => $email, 
+        'password' => password_hash($password, PASSWORD_DEFAULT)
+        ]);
 
     $_SESSION['status'] = 'success';
     $_SESSION['message'] = 'Эл. адрес будет вашим логином при авторизации';
