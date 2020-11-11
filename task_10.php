@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +37,7 @@
 
 
                                 <?php
-                                if (isset($_POST['text'])) {
+                                if (!empty($_POST['text'])) {
                                     $text = $_POST['text'];
                                     $pdo = new PDO('mysql:host=127.0.0.1;dbname=marlin_users', 'root', 'root');
 
