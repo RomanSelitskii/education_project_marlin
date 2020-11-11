@@ -18,12 +18,12 @@ if($is_double == false) {
 
     $_SESSION['status'] = 'success';
     $_SESSION['message'] = 'Эл. адрес будет вашим логином при авторизации';
-    header('Location: /auth/login.php');
+    header('Location: /auth/page_login.php');
     exit;
 } else {
     $_SESSION['status'] = 'danger';
     $_SESSION['message'] = 'Такой эл. адрес уже есть в базе!';
-    header('Location: /auth/login.php');
+    header('Location: /auth/page_register.php');
     exit;
 }
 ?>
