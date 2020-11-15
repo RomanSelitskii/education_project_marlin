@@ -13,4 +13,4 @@ if ($edit_result == TRUE){
 } else {
     set_flash_message ('danger', 'Адрес почты занят!');
 }
-redirect_to('security.php?id='.$user_id);
+redirect_to('users.php');
