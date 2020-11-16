@@ -335,17 +335,12 @@ function set_avatar($user_id, $avatar) {
     //формируем конечный путь загрузки файла
     $upload_file = $upload_dir . $avatar_full_name;
 
-    if(file_exists($upload_file)){
-        //удаляем прежний файл
-        unlink($upload_file);
+    //удаляем прежний файл
+    unlink($upload_file);
 
-        //загружаем файл
-        move_uploaded_file($avatar['tmp_name'], $upload_file);
-    } else {
-        //загружаем файл
-        move_uploaded_file($avatar['tmp_name'], $upload_file);
-    }
-   
+    //загружаем файл
+    move_uploaded_file($avatar['tmp_name'], $upload_file);
+
     //блок записи в базу
     $pdo = new PDO('mysql:host=127.0.0.1;dbname=marlin_users', 'root', 'root');
     
@@ -521,13 +516,3 @@ function delete_user($user_id){
         'user_id' => $user_id
     ]);
 }
-
-/*
-    Parametrs:
-        int — $user_id
-        string — $avatar
-
-    Description: проверяет, есть ли у пользователя аварат
-
-    Return value: boolean
-*/
