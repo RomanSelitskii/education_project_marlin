@@ -521,3 +521,13 @@ function delete_user($user_id){
         'user_id' => $user_id
     ]);
 }
+
+/*
+    Parametrs:
+        int — $user_id
+        string — $avatar
+
+    Description: проверяет, есть ли у пользователя аварат
+
+    Return value: boolean
+*/

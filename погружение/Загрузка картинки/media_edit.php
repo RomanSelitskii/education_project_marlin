@@ -5,6 +5,8 @@ require "functions.php";
 $avatar = $_FILES['avatar'];
 $user_id = $_GET['id'];
 
+$user = get_user_by_id($user_id);
+
 
 if ($avatar['name']==''){
     set_flash_message ('danger', 'Не задана картинка!');

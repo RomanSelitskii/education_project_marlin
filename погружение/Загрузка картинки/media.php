@@ -18,6 +18,12 @@ $user = get_user_by_id($_GET['id']);
 
 display_flash_message('danger');
 display_flash_message('success');
+
+
+if($user['avatar']==""){
+    $user['avatar'] = "avatar-m.png";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
