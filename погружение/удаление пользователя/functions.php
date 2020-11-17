@@ -335,17 +335,12 @@ function set_avatar($user_id, $avatar) {
     //формируем конечный путь загрузки файла
     $upload_file = $upload_dir . $avatar_full_name;
 
-    if(file_exists($upload_file)){
-        //удаляем прежний файл
-        unlink($upload_file);
+    //удаляем прежний файл
+    unlink($upload_file);
 
-        //загружаем файл
-        move_uploaded_file($avatar['tmp_name'], $upload_file);
-    } else {
-        //загружаем файл
-        move_uploaded_file($avatar['tmp_name'], $upload_file);
-    }
-   
+    //загружаем файл
+    move_uploaded_file($avatar['tmp_name'], $upload_file);
+
     //блок записи в базу
     $pdo = new PDO('mysql:host=127.0.0.1;dbname=marlin_users', 'root', 'root');
     
@@ -513,8 +508,23 @@ function edit_credentials($user_id, $email, $password){
     Return value: NULL
 */
 function delete_user($user_id){
+    //удаляем аватар пользователя
     $pdo = new PDO('mysql:host=127.0.0.1;dbname=marlin_users', 'root', 'root');
-    //$sql = 'DELETE FROM users_table, general_information, social_links WHERE users_table.id = :user_id AND general_information.user_id = :user_id AND social_links.user_id = :user_id';
+    $sql = "SELECT avatar FROM general_information WHERE user_id = :user_id";
+    $statement = $pdo->prepare($sql);
+    $statement->execute([
+        'user_id' => $user_id
+        ]
+    );
+    $avatar_name = $statement->fetch(PDO::FETCH_ASSOC);
+    
+    $avatar_file = $_SERVER['DOCUMENT_ROOT'] . '/auth/avatars/' . $avatar_name['avatar'];
+    
+    if(file_exists($avatar_file)){
+        unlink ($avatar_file);  
+    }
+
+    //удаляем записи о пользователе в таблицах БД 
     $sql = 'DELETE FROM users_table WHERE id = :user_id; DELETE FROM general_information WHERE user_id = :user_id; DELETE FROM social_links WHERE user_id = :user_id';
     $statement = $pdo->prepare($sql);
     $statement->execute([
